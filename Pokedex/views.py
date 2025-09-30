@@ -21,7 +21,7 @@ def index(request):
             types = [t['type']['name'].capitalize() for t in list_of_data['types']]
             abilities = [a['ability']['name'].replace('-', ' ').capitalize() for a in list_of_data['abilities']]
             stats = {s['stat']['name'].capitalize(): s['base_stat'] for s in list_of_data['stats']}
-            moves = [m['move']['name'].replace('-', ' ').capitalize() for m in list_of_data['moves'][:5]]
+            moves = [m['move']['name'].replace('-', ' ').capitalize() for m in list_of_data['moves'][:3]]
             url_species = urllib.request.Request(f'https://pokeapi.co/api/v2/pokemon-species/{pokemon}')
             url_species.add_header('User-Agent', "pikachu")
             source_species = urllib.request.urlopen(url_species).read()

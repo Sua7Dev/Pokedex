@@ -1,5 +1,29 @@
 body {
-    background-color: #ef3e38;
+    background-size: 400% 400%;
+    /* 💥 CORRECCIÓN: Añade la dirección al inicio del degradado. */
+    background-image: linear-gradient(
+        -45deg, 
+        #6a040f,
+        #9d0208,
+        #d00000,
+        #dc2f02,
+        #ef3e38
+    );
+    animation: degradado-animado 5s ease infinite;
+    min-height: 100vh;
+    margin: 0;
+}
+
+@keyframes degradado-animado {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 form {
@@ -54,4 +78,90 @@ form {
     
     /* Si quieres que el ancho sea EXACTAMENTE solo el texto */
     width: min-content;
+}
+
+.imagen {
+    width: 300px;
+    height: 200px;
+    max-width: 100%;
+    height: auto;
+    float: left;
+    margin-right: 10px; 
+}
+
+.imagen:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.tarjeta {
+width: 90%; max-width: 900px; padding: 20px 30px; border-radius: 15px; margin: 20px auto; text-align: center;
+}
+
+.tarjeta_r {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    flex-wrap: wrap
+}
+
+.tarjeta_r div {
+    flex: 1;
+    min-width:120px;
+}
+
+.error {
+    width: fit-content; 
+    
+    /* 2. Limita el ancho en pantallas pequeñas (Responsiveness) */
+    /* Si el texto es muy largo, lo obliga a saltar de línea. */
+    max-width: 90%; 
+    
+    /* PROPIEDADES DE CENTRADO */
+    
+    /* 3. Centra la tarjeta completa horizontalmente */
+    /* Funciona porque el elemento ahora tiene un ancho definido/autoajustable */
+    margin: 25px auto 5px auto; 
+    
+    /* 4. Alinea el texto dentro de la tarjeta (si hay múltiples líneas) */
+    text-align: center; 
+    
+    /* PROPIEDADES DE ESTILO (Se mantienen) */
+    
+    /* Nota: 'display: flex' y 'justify-content: center' ya no son estrictamente 
+       necesarias aquí a menos que el contenido interior sea complejo */
+    display: block; /* Asegura el comportamiento de bloque para 'margin: auto' */
+    padding: 15px 30px; 
+    background-color: rgb(37, 33, 26);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.escribe {
+    width: fit-content; 
+    
+    /* 2. Limita el ancho en pantallas pequeñas (Responsiveness) */
+    /* Si el texto es muy largo, lo obliga a saltar de línea. */
+    max-width: 90%; 
+    
+    /* PROPIEDADES DE CENTRADO */
+    
+    /* 3. Centra la tarjeta completa horizontalmente */
+    /* Funciona porque el elemento ahora tiene un ancho definido/autoajustable */
+    margin: 25px auto 5px auto; 
+    
+    /* 4. Alinea el texto dentro de la tarjeta (si hay múltiples líneas) */
+    text-align: center; 
+    
+    /* PROPIEDADES DE ESTILO (Se mantienen) */
+    
+    /* Nota: 'display: flex' y 'justify-content: center' ya no son estrictamente 
+       necesarias aquí a menos que el contenido interior sea complejo */
+    display: block; /* Asegura el comportamiento de bloque para 'margin: auto' */
+    padding: 15px 30px; 
+    background-color: rgb(37, 33, 26);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
