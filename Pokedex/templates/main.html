@@ -9,61 +9,45 @@
 </head>
 <body>
     <div class="content">
-        <h1 class="titulo">Pokedex</h1>
+        <img class="titulo-img" src="{% static 'pokedex.webp' %}" alt="">
+       <!-- <h1 class="titulo">Pokedex</h1> -->
         <form method="POST">
             {% csrf_token %}
             <input class="Input" type="text" name="pokemon" placeholder="Ingresa el nombre del pokemon">
             <button class="Buscar" type="submit">🔎 Buscar</button>
         </form>
-         <div>
+
         {% if id and nombre %}
-        <img class="imagen" src="{{ imagen }}" alt="{{ nombre }} sprite" style="width:100px">        
-        <div class="tarjeta">
-            <div class="tarjeta_r">
-                <div><strong>Número:</strong> {{ id }}</div>
-                <div><strong>Nombre:</strong> {{ nombre }}</div>
-            </div>
-            <div class="tarjeta_r">
-                <div><strong>Altura:</strong> {{ altura }}</div>
-                <div><strong>Peso:</strong> {{ peso }}</div>
-            </div>
-            
+            <div class="tarjeta">
+                <img class="imagen" src="{{ imagen }}" alt="{{ nombre }} sprite">
 
-            <div class="tarjeta_r">
-                <div>
-                    <strong>Tipos:</strong>
-                    <ul style="margin:0; padding-left:0;">
-                        {% for tipo in tipos %}<p>{{ tipo }}</p>{% endfor %}
-                    </ul>
+                <div class="info-basica">
+                    <div><strong>Número:</strong> {{ id }}</div>
+                    <div><strong>Nombre:</strong> {{ nombre }}</div>
+                    <div><strong>Altura:</strong> {{ altura }}</div>
+                    <div><strong>Peso:</strong> {{ peso }}</div>
+                    <div><strong>Tipos:</strong> {{ tipos }}</div>
                 </div>
-            </div>
 
-            <div class="tarjeta_r">
-                <div>
-                    <strong>Habilidades:</strong>
-                    <ul style="margin:0; padding-left:0;">
-                        {% for hab in habilidades %}<p>{{ hab }}</p>{% endfor %}
-                    </ul>
+                <div class="habilidades-movimientos">
+                    <div>
+                        <strong>Habilidades:</strong>
+                        <p>{{ habilidades }}</p>
+                    </div>
+                    <div>
+                        <strong>Movimientos:</strong>
+                        <p>{{ movimientos }}</p>
+                    </div>
                 </div>
-                <div>
-                    <strong>Movimientos (primeros 3):</strong>
-                    <ul style="margin:0; padding-left:0;">
-                        {% for move in movimientos %}<p>{{ move }}</p>{% endfor %}
-                    </ul>
-                </div>
-            </div>
 
-            <div class="tarjeta_r">
-                <div>
-                    <strong>Estadísticas:</strong>
-                    <ul style="margin:0; padding-left:0;">
-                        {% for stat, val in estadisticas.items %}<p>{{ stat }}: {{ val }}</p>{% endfor %}
-                    </ul>
+                <div class="estadisticas">
+                    <div>
+                        <strong>Estadísticas:</strong>
+                        <p>{{ estadisticas }}</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="tarjeta_r">
-                <div>
+                <div class="descripcion">
                     <strong>Descripción:</strong>
                     <p>{{ descripcion }}</p>
                 </div>

@@ -1,15 +1,12 @@
 body {
     background-size: 400% 400%;
-    /* 💥 CORRECCIÓN: Añade la dirección al inicio del degradado. */
     background-image: linear-gradient(
         -45deg, 
-        #6a040f,
-        #9d0208,
-        #d00000,
-        #dc2f02,
-        #ef3e38
+        #f2372e,
+        #e81123,
+        #430804
     );
-    animation: degradado-animado 5s ease infinite;
+    animation: degradado-animado 15s ease infinite;
     min-height: 100vh;
     margin: 0;
 }
@@ -27,57 +24,80 @@ body {
 }
 
 form {
-    /* 1. Habilita Flexbox */
     display: flex; 
-    
-    /* 2. Opcional: Centra el grupo horizontalmente */
     justify-content: center;
-    
-    /* 3. Opcional: Centra los ítems verticalmente */
     align-items: center; 
     
-    /* 4. Opcional: Asegura que los ítems no se envuelvan si no hay espacio */
-    flex-wrap: nowrap;
+    /* CAMBIO CLAVE: Permite que los ítems se envuelvan para responsividad */
+    flex-wrap: wrap; 
+    
+    /* Agrega espacio entre el input y el botón (opcional) */
+    gap: 10px; 
+}
+
+.Input[type="text"] {
+    /* Eliminamos display: flex, justify-content, align-items que no son necesarios */
+    border: 0.1rem solid #2688b6;
+    border-radius: 5px;
+    padding: 10px; 
+    box-sizing: border-box; 
+    
+    /* CAMBIO CLAVE: Usa el espacio disponible, pero limita el ancho máximo */
+    width: 100%; 
+    max-width: 400px; /* Limita el ancho en pantallas grandes */
+    
+    /* Asegura que el input crezca más que el botón */
+    flex-grow: 1; 
+}
+
+.Buscar {
+    /* Eliminamos display: flex, justify-content, align-items que no son necesarios */
+    border: 0.1rem solid #2688b6;
+    border-radius: 5px;
+    padding: 10px; 
+    box-sizing: border-box; 
+    
+    /* CAMBIO CLAVE: Solo usa el ancho necesario para el texto */
+    width: auto; 
+    
+    /* Opcional: Asegura que el botón no se encoja */
+    flex-shrink: 0; 
+}
+
+/* --- Media Query para Móviles --- */
+@media (max-width: 600px) { 
+    .Input[type="text"],
+    .Buscar {
+        /* Fuerza a ambos a ocupar todo el ancho disponible en la fila */
+        width: 100%; 
+        
+        /* Asegura que el input no se limite por el max-width en móvil */
+        max-width: none; 
+        
+        /* Opcional: si quieres que el input no crezca más allá del 100% de su contenedor */
+        flex-grow: 0;
+    }
+}
+
+.content {
+    padding-top: 1px;
+}
+
+.titulo-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 250px;
+    height: 150px;
+    max-width: 100%;
 }
 
 .titulo {
     text-align: center;
     color: white;
     font-family: 'sans-serif';
-}
-
-.Input[type="text"] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0.1rem solid #2688b6;;
-    border-radius: 5px;
-    min-width: 38ch; 
-    
-    /* Importante: asegura que el padding no desborde el min-width */
-    padding: 10px; 
-    /* Si usaste padding, recuerda el box-sizing */
-    box-sizing: border-box; 
-    
-    /* Si quieres que el ancho sea EXACTAMENTE solo el texto */
-    width: min-content;
-}
-
-.Buscar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0.1rem solid #2688b6;;
-    border-radius: 5px;
-    min-width: 38ch; 
-    
-    /* Importante: asegura que el padding no desborde el min-width */
-    padding: 10px; 
-    /* Si usaste padding, recuerda el box-sizing */
-    box-sizing: border-box; 
-    
-    /* Si quieres que el ancho sea EXACTAMENTE solo el texto */
-    width: min-content;
 }
 
 .imagen {
@@ -103,6 +123,99 @@ width: 90%; max-width: 900px; padding: 20px 30px; border-radius: 15px; margin: 2
     justify-content: space-between;
     margin: 5px 0;
     flex-wrap: wrap
+}
+
+.info-basica {
+    width: fit-content; 
+    max-width: 90%; 
+    margin: 25px 0 5px auto;
+    text-align: left; 
+    display: flex;         
+    justify-content: space-between; 
+    gap: 20px;              
+    padding: 15px 30px; 
+    background-color: rgb(37, 33, 26);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    flex-wrap: wrap;       
+}
+
+.info-basica div {
+    flex: 1;
+    min-width: 150px;
+}
+.tipos {
+    width: fit-content; 
+    max-width: 90%; 
+    margin: 25px 0 5px auto;
+    text-align: right; 
+    display: flex;         
+    justify-content: space-between; 
+    gap: 20px;              
+    padding: 15px 30px; 
+    background-color: rgb(37, 33, 26);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    flex-wrap: wrap;
+}
+
+.tipos p, .tipos li {
+    margin: 0;
+}
+.habilidades-movimientos {
+    width: fit-content; 
+    max-width: 90%; 
+    margin: 25px 0 5px auto;
+    text-align: left; 
+    display: flex;         
+    justify-content: space-between; 
+    gap: 20px;              
+    padding: 15px 30px; 
+    background-color: rgb(37, 33, 26);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    flex-wrap: wrap;
+}
+
+.habilidades-movimientos div {
+    flex: 1;
+    min-width: 200px;
+}
+
+.estadisticas {
+    width: fit-content; 
+    max-width: 90%; 
+    margin: 25px 0 5px auto;
+    text-align: left; 
+    display: flex;         
+    justify-content: space-between; 
+    gap: 20px;              
+    padding: 15px 30px; 
+    background-color: rgb(37, 33, 26);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    flex-wrap: wrap;
+}
+
+.estadisticas div {
+    flex: 1;
+    min-width: 150px;
+}
+.descripcion {
+    width: fit-content; 
+    max-width: 59%; 
+    text-align: left; 
+    margin: 25px 0 5px auto;     
+    justify-content: space-between; 
+    padding: 15px 30px; 
+    background-color: rgb(37, 33, 26);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 .tarjeta_r div {
