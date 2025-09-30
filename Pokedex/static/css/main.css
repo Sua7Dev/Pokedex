@@ -1,0 +1,57 @@
+body {
+    background-color: #ef3e38;
+}
+
+form {
+    /* 1. Habilita Flexbox */
+    display: flex; 
+    
+    /* 2. Opcional: Centra el grupo horizontalmente */
+    justify-content: center;
+    
+    /* 3. Opcional: Centra los ítems verticalmente */
+    align-items: center; 
+    
+    /* 4. Opcional: Asegura que los ítems no se envuelvan si no hay espacio */
+    flex-wrap: nowrap;
+}
+
+.titulo {
+    text-align: center;
+    color: white;
+    font-family: 'sans-serif';
+}
+
+.Input[type="text"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid #2688b6;;
+    border-radius: 5px;
+    min-width: 38ch; 
+    
+    /* Importante: asegura que el padding no desborde el min-width */
+    padding: 10px; 
+    /* Si usaste padding, recuerda el box-sizing */
+    box-sizing: border-box; 
+    
+    /* Si quieres que el ancho sea EXACTAMENTE solo el texto */
+    width: min-content;
+}
+
+.Buscar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid #2688b6;;
+    border-radius: 5px;
+    min-width: 38ch; 
+    
+    /* Importante: asegura que el padding no desborde el min-width */
+    padding: 10px; 
+    /* Si usaste padding, recuerda el box-sizing */
+    box-sizing: border-box; 
+    
+    /* Si quieres que el ancho sea EXACTAMENTE solo el texto */
+    width: min-content;
+}

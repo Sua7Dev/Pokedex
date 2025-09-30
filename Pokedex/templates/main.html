@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+</head>
+<body>
+    <div class="content">
+        <h1 class="titulo">Pokedex</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <input class="Input" type="text" name="pokemon" placeholder="Ingresa el nombre del pokemon">
+            <button class="Buscar" type="submit">🔎 Buscar</button>
+        </form>
+         <div>
+        {% if id and nombre %}
+        
+            <img class="imagen" src="{{ imagen }}" alt="{{ nombre }} sprite" style="width:100px">
+            <h3 class="numero">Número: {{ id }}</h3>
+            <h3 class="nombre">Nombre: {{ nombre }}</h3>
+            <h3 class="altura">Altura: {{ altura }}</h3>
+            <h3 class="peso">Peso: {{ peso }}</h3>
+            
+
+            <h3 class="tipo">Tipos:</h3>
+            <ul>
+                {% for tipo in tipos %}
+                    <li>{{ tipo }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="habilidad">Habilidades:</h3>
+            <ul>
+                {% for habilidad in habilidades %}
+                    <li>{{ habilidad }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="estadistica">Estadísticas:</h3>
+            <ul>
+                {% for stat, valor in estadisticas.items %}
+                    <li>{{ stat }}: {{ valor }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="movimiento">Movimientos (primeros 5):</h3>
+            <ul>
+                {% for move in movimientos %}
+                    <li>{{ move }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3 class="descripcion">Descripción:</h3>
+            <p>{{ descripcion }}</p>
+        {% elif error %}
+            <p style="color:rgb(255, 255, 255);">{{ error }}</p>
+        {% else %}
+            <div>
+                <h3 class="escribe">Escribe el nombre o ID de tu Pokémon.</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
