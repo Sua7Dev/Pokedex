@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'pokeball.ico' %}">
+</head>
+<body>
+    <script>
+        // 1. Guardar la posición de scroll antes de que la página se cierre/recarque
+        window.addEventListener('beforeunload', () => {
+            // Guarda la posición vertical del scroll
+            localStorage.setItem('scrollpos', window.scrollY);
+        });
+
+        // 2. Restaurar la posición de scroll una vez que la página ha cargado
+        window.onload = () => {
+            const scrollPos = localStorage.getItem('scrollpos');
+            
+            if (scrollPos) {
+                // Si existe una posición guardada, desplaza la ventana a esa posición
+                window.scrollTo(0, parseInt(scrollPos));
+                
+                // Opcional: Eliminar la posición para que solo se use una vez
+                // localStorage.removeItem('scrollpos'); 
+            }
+        };
+    </script>
+    <div class="content">
+        <img class="titulo-img" src="{% static 'pokedex.webp' %}" alt="">
+
+        <form method="POST">
+            {% csrf_token %}
+            <input class="Input" type="text" name="pokemon" placeholder="Ingresa el nombre del Pokémon">
+            <div class="botones-grupo">
+                <button class="Buscar" type="submit">🔎 Buscar</button>
+                <button class="Aleatorio" type="submit" name="accion" value="aleio">🎲 Sorpresa</button>
+            </div>
+
+        </form>
+        
+        {% if id and nombre %}
+            <div class="tarjeta">
+                <img class="imagen" src="{{ imagen }}" alt="{{ nombre }} sprite">
+            <div class="titulo">
+                <h2>
+                    {% if nombre == "Grumpig" %}
+                      Mariangeles (#{{ id }})
+                    {% else %}
+                        {{ nombre }} (#{{ id }})
+                    {% endif %}
+                </h2>
+            </div>
+                <div class="info-basica">
+                    <p><span class="subtitulo azul">Altura:</span> {{ altura }} | <span class="subtitulo azul">Peso:</span> {{ peso }}</p>
+                    <p><span class="subtitulo azul">Tipos:</span> {{ tipos }}</p>
+                </div>
+
+                <div class="habilidades-movimientos">
+                    <p><span class="subtitulo azul">Habilidades:</span> {{ habilidades }}</p>
+                    <p><span class="subtitulo azul">Movimientos:</span> {{ movimientos }}</p>
+                </div>
+
+                <div class="estadisticas">
+                    <p><span class="subtitulo azul">Estadísticas:</span> {{ estadisticas }}</p>
+                </div>
+
+                <div class="descripcion">
+                    <p><span class="subtitulo azul">Descripción:</span> {{ descripcion }}</p>
+                </div>
+            </div>
+            
+            <div class="navegacion">
+                {% if id|add:"-1" > 0 %}
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="pokemon" value="{{ id|add:"-1" }}">
+                        <button type="submit" class="NavBtn">◀ Anterior</button>
+                    </form>
+                {% endif %}
+
+                {% if id|add:"1" <= 1025 %}
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="pokemon" value="{{ id|add:"1" }}">
+                        <button type="submit" class="NavBtn">Siguiente ▶</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% elif error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <div>
+                <h3 class="escribe">Escribe el nombre o ID de tu Pokémon.</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
