@@ -17,45 +17,30 @@ cd myproject
 ```
 ### - step 2. In your terminal, type to clone the repository:
 ```bash
-git clone https://github.com/Sua7Dev/EPI-SYSTEM.git
+git clone https://github.com/Sua7Dev/Pokedex
 ```
 
-### - step 3. rename the "streamlit" folder to ".streamlit" in the main and src:
-
-
-### - step 4. creates a virtual environment:
+### - step 3. creates a virtual environment:
 ```bash
 python -m venv .venv
 ```
 
-### - step 5. activate the virtual environment (this is for Windows PowerShell):
+### - step 4. activate the virtual environment (this is for Windows PowerShell):
 ```bash
 .venv\Scripts\Activate.ps1
 ```
 
-### - step 6. installs the necessary libraries:
+### - step 5. installs the necessary libraries:
 ```bash
 pip install -r requirements.txt
 ```
 
-### - step 7. access the src folder:
+### - step 6. access manage.py file:
 ```bash
-
+python manage.py runserver
 ```
-
-### - step 8. we compile to .exe:
-```bash
-
-```
+and cntrl + click in the link genered
 
 
-
-## Run Locally
-
-To test the page locally before compiling to .exe, you can run
-```bash
-cd src
-```
-```bash
-streamlit run main.py
-```
+## Note
+You need to know the basics of django and know start a project and a app for understand the code to run it correctly.
