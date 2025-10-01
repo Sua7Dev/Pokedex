@@ -36,61 +36,116 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
+/* ======================================= */
+/* 1. ESTILOS GENERALES (PC Y CENTRADO GLOBAL) */
+/* ======================================= */
 form {
     display: flex; 
-    justify-content: center;
+    justify-content: center; /* Centra el contenido en el contenedor principal */
     align-items: center; 
     
-    /* CAMBIO CLAVE: Permite que los ítems se envuelvan para responsividad */
+    /* Importante: permite que los ítems se envuelvan */
     flex-wrap: wrap; 
     
-    /* Agrega espacio entre el input y el botón (opcional) */
+    /* Espacio entre el input y el grupo de botones */
     gap: 10px; 
+    
+    /* CENTRADO GLOBAL: Controla el ancho máximo del formulario y lo centra en la página */
+    max-width: 800px;
+    width: 95%; /* Ocupa casi todo el ancho disponible */
+    margin: 20px auto; /* Centra el formulario horizontalmente */
 }
 
 .Input[type="text"] {
-    /* Eliminamos display: flex, justify-content, align-items que no son necesarios */
     border: 0.1rem solid #2688b6;
-    border-radius: 5px;
+    border-radius: 13px;
     padding: 10px; 
     box-sizing: border-box; 
     
-    /* CAMBIO CLAVE: Usa el espacio disponible, pero limita el ancho máximo */
     width: 100%; 
-    max-width: 400px; /* Limita el ancho en pantallas grandes */
+    max-width: 380px; /* Limita el ancho del campo en PC */
+    flex-grow: 1; /* El input debe crecer más que los botones */
     
-    /* Asegura que el input crezca más que el botón */
-    flex-grow: 1; 
+    /* Aseguramos que el input tenga el mismo alto que los botones en PC */
+    height: 40px; 
 }
 
-.Buscar {
-    /* Eliminamos display: flex, justify-content, align-items que no son necesarios */
-    border: 0.1rem solid #2688b6;
-    border-radius: 5px;
-    padding: 10px; 
-    box-sizing: border-box; 
+/* ------------------------------------------- */
+/* 2. ESTILOS DEL GRUPO DE BOTONES (PC y Móvil) */
+/* ------------------------------------------- */
+.botones-grupo {
+    display: flex; /* Habilita Flexbox para colocar los botones lado a lado */
+    align-items: center;
+    gap: 10px; /* Pequeño espacio entre los botones */
     
-    /* CAMBIO CLAVE: Solo usa el ancho necesario para el texto */
-    width: auto; 
-    
-    /* Opcional: Asegura que el botón no se encoja */
+    /* Aseguramos que el grupo de botones no se encoja forzadamente en PC */
     flex-shrink: 0; 
 }
 
-/* --- Media Query para Móviles --- */
-@media (max-width: 600px) { 
-    .Input[type="text"],
-    .Buscar {
-        /* Fuerza a ambos a ocupar todo el ancho disponible en la fila */
-        width: 100%; 
-        
-        /* Asegura que el input no se limite por el max-width en móvil */
-        max-width: none; 
-        
-        /* Opcional: si quieres que el input no crezca más allá del 100% de su contenedor */
-        flex-grow: 0;
+/* ------------------------------------------- */
+/* 3. ESTILOS VISUALES DE BOTONES */
+/* ------------------------------------------- */
+.Buscar, .Aleatorio {
+    padding: 8px 15px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    /* Eliminamos el margin-left que tenías, el 'gap' del grupo lo maneja */
+    margin-left: 0; 
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    background-color: #ffcc01;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background 0.3s;
+    
+    /* Importante: para que los botones mantengan su ancho en móvil, 
+       no deben tener 'width: 100%' por defecto. */
+    width: auto; 
+    flex-shrink: 0;
+}
+
+.Buscar:hover, .Aleatorio:hover {
+    background-color: #ffb300;
+    transform: scale(1.05);
+}
+
+
+/* ======================================= */
+/* 4. MEDIA QUERY PARA MÓVILES (max-width: 600px) */
+/* ======================================= */
+@media (max-width: 600px) {
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .Input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .botones-grupo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .Buscar, .Aleatorio {
+        width: 48%;
+    }
+
+    .info-basica, .habilidades-movimientos, .estadisticas, .descripcion {
+    margin: 10px 0;
+    text-align: left;
+    font-size: 0.95rem;
     }
 }
+
 
 .content {
     padding-top: 1px;
@@ -102,13 +157,13 @@ form {
     margin-right: auto;
     margin-top: 25px;
     margin-bottom: 25px;
-    width: 250px;
+    width: 300px;
     height: 150px;
     max-width: 100%;
 }
 
 .titulo {
-    text-align: left;
+    text-align: center;
     color: rgb(0, 0, 0);
 }
 
@@ -217,44 +272,15 @@ form {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 768px) {
-    .Input[type="text"] {
-        max-width: 100%;
-        width: 100%;
-    }
-    .tarjeta {
-        padding: 15px;
-    }
-    .imagen {
-        width: 180px;
-    }
-    .info-basica, .habilidades-movimientos, .estadisticas {
-        flex-direction: column;
-        text-align: center;
-    }
-}
+
 /* Botones principales */
-.Buscar, .Aleatorio {
-    padding: 8px 15px;
-    font-size: 15px;
-    border: none;
-    border-radius: 8px;
-    margin-left: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #333;
-    background-color: #ffcc01;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.2s, background 0.3s;
-}
-.Buscar:hover, .Aleatorio:hover {
-    background-color: #ffb300;
-    transform: scale(1.05);
-}
+
 
 .navegacion {
     margin-top: 15px;
     text-align: center;
+    margin-bottom: 20px;
+    gap: 5px
 }
 .NavBtn {
     padding: 10px 18px;
@@ -268,8 +294,31 @@ form {
     background-color: #ffeb3b;
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
     transition: transform 0.2s, background 0.3s;
+    margin: 1;
+    flex: 1 1 45%;
+    gap: 10px
 }
 .NavBtn:hover {
     background-color: #fdd835;
     transform: translateY(-2px);
+    gap: 5px
+}
+@media (max-width: 768px) {
+    .tarjeta {
+        padding: 15px;
+    }
+    .imagen {
+        width: 180px;
+    }
+    .info-basica, .habilidades-movimientos, .estadisticas {
+        flex-direction: column;
+        text-align: left;
+    }
+        .navegacion {
+        margin-bottom: 30px;
+    }
+
+    .NavBtn {
+        margin: 5px 1%;
+}
 }
