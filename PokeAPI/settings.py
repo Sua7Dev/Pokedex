@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,15 +26,18 @@ SECRET_KEY = 'django-insecure-_ek&1ojyhmtl$8@!-yjobe%0n=^7@9ogojc&@yekbmz+9+vr!2
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "RENDER_EXTERNAL_HOSTNAME",
     "127.0.0.1",
     "127.0.0.1:8000",
     "localhost",
     "[::1]",
-    "sensitivity-drinking-proud-housewares.trycloudflare.com"
+    "sensitivity-drinking-proud-housewares.trycloudflare.com",
 ]
 
 
 CSRF_TRUSTED_ORIGINS = [
+    "http://RENDER_EXTERNAL_HOSTNAME",
+    "https://RENDER_EXTERNAL_HOSTNAME",
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
     "http://localhost",
@@ -62,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'PokeAPI.urls'
@@ -128,6 +132,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATIC_URL = 'static/'
 
