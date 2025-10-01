@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_ek&1ojyhmtl$8@!-yjobe%0n=^7@9ogojc&@yekbmz+9+vr!2
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "RENDER_EXTERNAL_HOSTNAME"
+    "RENDER_EXTERNAL_HOSTNAME",
     "127.0.0.1",
     "127.0.0.1:8000",
     "localhost",
@@ -36,6 +36,8 @@ ALLOWED_HOSTS = [
 
 
 CSRF_TRUSTED_ORIGINS = [
+    "http://RENDER_EXTERNAL_HOSTNAME",
+    "https://RENDER_EXTERNAL_HOSTNAME",
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
     "http://localhost",
