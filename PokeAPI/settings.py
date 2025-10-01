@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1:8000",
     "localhost",
     "[::1]",
-    "resolution-posters-queue-detector.trycloudflare.com"
+    "sensitivity-drinking-proud-housewares.trycloudflare.com"
 ]
 
 
@@ -39,7 +39,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000",
     "http://localhost",
     #"[::1]",
-    "https://resolution-posters-queue-detector.trycloudflare.com"    
+    "https://sensitivity-drinking-proud-housewares.trycloudflare.com"    
 ]
 
 # Application definition

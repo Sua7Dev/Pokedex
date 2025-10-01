@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import urllib.request 
 import json 
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError 
 
 def index(request):
     try:

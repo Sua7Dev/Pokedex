@@ -6,51 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'pokeball.ico' %}">
 </head>
 <body>
     <div class="content">
         <img class="titulo-img" src="{% static 'pokedex.webp' %}" alt="">
-       <!-- <h1 class="titulo">Pokedex</h1> -->
+
         <form method="POST">
             {% csrf_token %}
-            <input class="Input" type="text" name="pokemon" placeholder="Ingresa el nombre del pokemon">
+            <input class="Input" type="text" name="pokemon" placeholder="Ingresa el nombre del Pokémon">
             <button class="Buscar" type="submit">🔎 Buscar</button>
+            <button class="Aleatorio" type="submit" name="accion" value="aleatorio">🎲 Sorpresa</button>
         </form>
 
         {% if id and nombre %}
             <div class="tarjeta">
                 <img class="imagen" src="{{ imagen }}" alt="{{ nombre }} sprite">
-
+                <div class="titulo">
+                    <h2>{{ nombre }} (#{{ id }})</h2>
+                </div>
                 <div class="info-basica">
-                    <div><strong>Número:</strong> {{ id }}</div>
-                    <div><strong>Nombre:</strong> {{ nombre }}</div>
-                    <div><strong>Altura:</strong> {{ altura }}</div>
-                    <div><strong>Peso:</strong> {{ peso }}</div>
-                    <div><strong>Tipos:</strong> {{ tipos }}</div>
+                    <p><span class="subtitulo azul">Altura:</span> {{ altura }} | <span class="subtitulo azul">Peso:</span> {{ peso }}</p>
+                    <p><span class="subtitulo azul">Tipos:</span> {{ tipos }}</p>
                 </div>
 
                 <div class="habilidades-movimientos">
-                    <div>
-                        <strong>Habilidades:</strong>
-                        <p>{{ habilidades }}</p>
-                    </div>
-                    <div>
-                        <strong>Movimientos:</strong>
-                        <p>{{ movimientos }}</p>
-                    </div>
+                    <p><span class="subtitulo azul">Habilidades:</span> {{ habilidades }}</p>
+                    <p><span class="subtitulo azul">Movimientos:</span> {{ movimientos }}</p>
                 </div>
 
                 <div class="estadisticas">
-                    <div>
-                        <strong>Estadísticas:</strong>
-                        <p>{{ estadisticas }}</p>
-                    </div>
+                    <p><span class="subtitulo azul">Estadísticas:</span> {{ estadisticas }}</p>
                 </div>
 
                 <div class="descripcion">
-                    <strong>Descripción:</strong>
-                    <p>{{ descripcion }}</p>
+                    <p><span class="subtitulo azul">Descripción:</span> {{ descripcion }}</p>
                 </div>
+            </div>
+            
+            <div class="navegacion">
+                {% if id|add:"-1" > 0 %}
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="pokemon" value="{{ id|add:"-1" }}">
+                        <button type="submit" class="NavBtn">◀ Anterior</button>
+                    </form>
+                {% endif %}
+
+                {% if id|add:"1" <= 1025 %}
+                    <form method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="pokemon" value="{{ id|add:"1" }}">
+                        <button type="submit" class="NavBtn">Siguiente ▶</button>
+                    </form>
+                {% endif %}
             </div>
         {% elif error %}
             <p class="error">{{ error }}</p>
