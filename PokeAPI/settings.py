@@ -28,7 +28,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # DEBUG = 
 
 ALLOWED_HOSTS = [
-    "success-mats-ahead-souls.trycloudflare.com",
     "127.0.0.1",
     "127.0.0.1:8000",
     "localhost",
@@ -39,7 +38,6 @@ if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://success-mats-ahead-souls.trycloudflare.com",
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
     "http://localhost",
