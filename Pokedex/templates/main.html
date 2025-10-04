@@ -15,47 +15,39 @@
         <form method="POST">
             {% csrf_token %}
             <input class="Input" type="text" name="pokemon" placeholder="Ingresa el nombre del Pokémon">
-
-            <div class="filtros">
-                <select name="tipo">
-                    <option value="">-- Tipo --</option>
-                    {% for t in tipos_disponibles %}
-                        <option value="{{ t|lower }}">{{ t }}</option>
-                    {% endfor %}
-                </select>
-                <input type="number" step="0.1" name="altura" placeholder="Altura (m)">
-                <input type="number" step="0.1" name="peso" placeholder="Peso (kg)">
-            </div>
-
             <div class="botones-grupo">
                 <button class="Buscar" type="submit">🔎 Buscar</button>
                 <button class="Aleatorio" type="submit" name="accion" value="aleio">🎲 Sorpresa</button>
             </div>
+
         </form>
         
         {% if id and nombre %}
             <div class="tarjeta">
                 <img class="imagen" src="{{ imagen }}" alt="{{ nombre }} sprite">
-                <div class="titulo">
-                    <h2>
-                        {% if nombre == "Grumpig" %}
-                          Mariangeles (#{{ id }})
-                        {% else %}
-                            {{ nombre }} (#{{ id }})
-                        {% endif %}
-                    </h2>
-                </div>
+            <div class="titulo">
+                <h2>
+                    {% if nombre == "Grumpig" %}
+                      Mariangeles (#{{ id }})
+                    {% else %}
+                        {{ nombre }} (#{{ id }})
+                    {% endif %}
+                </h2>
+            </div>
                 <div class="info-basica">
                     <p><span class="subtitulo azul">Altura:</span> {{ altura }} | <span class="subtitulo azul">Peso:</span> {{ peso }}</p>
                     <p><span class="subtitulo azul">Tipos:</span> {{ tipos }}</p>
                 </div>
+
                 <div class="habilidades-movimientos">
                     <p><span class="subtitulo azul">Habilidades:</span> {{ habilidades }}</p>
                     <p><span class="subtitulo azul">Movimientos:</span> {{ movimientos }}</p>
                 </div>
+
                 <div class="estadisticas">
                     <p><span class="subtitulo azul">Estadísticas:</span> {{ estadisticas }}</p>
                 </div>
+
                 <div class="descripcion">
                     <p><span class="subtitulo azul">Descripción:</span> {{ descripcion }}</p>
                 </div>
@@ -69,6 +61,7 @@
                         <button type="submit" class="NavBtn">◀ Anterior</button>
                     </form>
                 {% endif %}
+
                 {% if id|add:"1" <= 1025 %}
                     <form method="POST" style="display:inline;">
                         {% csrf_token %}
@@ -80,19 +73,28 @@
         {% elif error %}
             <p class="error">{{ error }}</p>
         {% else %}
-            <div>
+            <div class="escribe-final">
                 <h3 class="escribe">Escribe el nombre o ID de tu Pokémon.</h3>
             </div>
         {% endif %}
     </div>
     <script>
+        // 1. Guardar la posición de scroll antes de que la página se cierre/recarque
         window.addEventListener('beforeunload', () => {
+            // Guarda la posición vertical del scroll
             localStorage.setItem('scrollpos', window.scrollY);
         });
+
+        // 2. Restaurar la posición de scroll una vez que la página ha cargado
         window.onload = () => {
             const scrollPos = localStorage.getItem('scrollpos');
+            
             if (scrollPos) {
+                // Si existe una posición guardada, desplaza la ventana a esa posición
                 window.scrollTo(0, parseInt(scrollPos));
+                
+                // Opcional: Eliminar la posición para que solo se use una vez
+                // localStorage.removeItem('scrollpos'); 
             }
         };
     </script>    

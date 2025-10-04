@@ -110,7 +110,6 @@ form {
     transform: scale(1.05);
 }
 
-
 /* ======================================= */
 /* 4. MEDIA QUERY PARA MÓVILES (max-width: 600px) */
 /* ======================================= */
@@ -125,6 +124,8 @@ form {
     .Input[type="text"] {
         width: 100%;
         margin-bottom: 10px;
+        margin-left: 1px;
+        margin-right: 15px;
     }
 
     .botones-grupo {
@@ -136,13 +137,29 @@ form {
     }
 
     .Buscar, .Aleatorio {
-        width: 48%;
+        width: 45%;
+    }
+
+    .Aleatorio {
+        margin-right: 15px;
+    }
+
+    .Buscar {
+        margin-left: 10px;
     }
 
     .info-basica, .habilidades-movimientos, .estadisticas, .descripcion {
     margin: 10px 0;
     text-align: left;
     font-size: 0.95rem;
+    }
+
+    .escribe-final{
+    width: fit-content; 
+    max-width: 90%; 
+    margin: 25px auto 5px auto; 
+    text-align: center; 
+    display: block; /* Asegura el comportamiento de bloque para 'margin: auto' */
     }
 }
 
